@@ -1,0 +1,33 @@
+---
+title: "Homework 4"
+author: "Veronique Letourneau"
+date: "2023-05-25"
+format: 
+  html:
+   toc: true
+    toc-location: left
+    code-fold: true
+    theme: yeti 
+editor: visual
+execute: 
+  message: false
+  warning: false
+---
+
+Link to my repo: https://github.com/veronique-let/ENVS-193DS_homework-04_Letourneau-Veronique.
+
+## Problem 1
+
+1. Write your null and alternative hypotheses in mathematical and biological terms.
+2. Create a visualization of the missing data for the filtered data set containing the observations you will use.
+a. Write an accompanying caption explaining how/if the missing data is relevant to your hypotheses.
+3. Run your test.
+4. Visually check the assumptions of your test. Display your diagnostic plots in a grid.
+5. For each diagnostic plot, describe in 1-2 sentences what it is showing you, and what you decide after looking at the plot.
+6. Display the results from summary() using your model object.
+
+7\. Create a table that summarizes the ANOVA table. Make sure this table has informative column and row names and p-values displayed without scientific notation.
+8. In 1-2 sentences, describe how the ANOVA table relates to the information you get from the summary() object.
+9. In 2-3 sentences, summarize your results in prose with in-text references to test results. Include all relevant information.
+10. Create a visualization with model predictions and confidence intervals on top of the underlying data. Finalize your plot.
+a. Write an accompanying caption.
