@@ -1,0 +1,696 @@
+
+  
+    
+      uid=NTL,o=EDI,dc=edirepository,dc=org
+      all
+    
+    
+      public
+      read
+    
+  
+  
+    doi:10.6073/pasta/968299a53784f9649eb67f421cc33340North Temperate Lakes LTER: Fish Lengths and Weights 1981 - current
+    
+      John Magnuson
+      University of Wisconsin-Madison
+      john.magnuson@wisc.edu
+      0000-0001-5612-8765
+    
+    
+      Stephen Carpenter
+      University of Wisconsin-Madison
+      steve.carpenter@wisc.edu
+      0000-0001-8097-8700
+    
+    
+      Emily Stanley
+      University of Wisconsin-Madison
+      ehstanley@wisc.edu
+      0000-0003-4922-8121
+    
+    
+      NTL Information Manager
+      University of Wisconsin-Madison
+      			680 North Park Street
+			Madison, WI 53706  United States
+      ntl.infomgr@gmail.com
+    
+    2022-12-23      Data are collected annually to enable us to track the fish assemblages of eleven primary lakes (Allequash, Big Muskellunge, Crystal, Sparkling, Trout, bog lakes 27-02 [Crystal Bog] and 12-15 [Trout Bog], Mendota, Monona, Wingra and Fish). Sampling on Lakes Monona, Wingra, and Fish started in 1995; sampling on other lakes started in 1981. Sampling is done at six littoral zone sites per lake with seine, minnow or crayfish traps, and fyke nets; a boat-mounted electrofishing system samples four littoral transects. Vertically hung gill nets are used to obtain two pelagic samples per lake from the deepest point. A trammel net samples across the thermocline at two sites per lake. In the bog lakes only fyke nets and minnow traps are deployed. Parameters measured include species-level identification and lengths for all fish caught, and weight and scale samples from a subset. Dominant species vary from lake to lake. Perch, rockbass, and bluegill are common, with walleye, large and smallmouth bass, northern pike and muskellunge as major piscivores. Cisco have been present in the pelagic waters of four lakes, and an exotic species, rainbow smelt, is present in two. The bog lakes contain mudminnows.
+      The only sampling done in 2020 were a single gill-netting replicate in Sparkling, Crystal, and Trout lakes. Sampling in Fish Lake was missed in 2021 due to significant lake level changes. Data from the two bogs is missing in 2022.
+      Sampling Frequency: annually Number of sites: 11.
+
+    
+      populations
+      biomass
+      fishes
+      LTER Controlled Vocabulary
+    
+    
+      biological (all)
+      fish
+      length
+      weight
+      NTL Core Datasets
+    
+    This information is released under the Creative Commons license - Attribution - CC BY (https://creativecommons.org/licenses/by/4.0/). The consumer of these data ("Data User" herein) is required to cite it appropriately in any publication that results from its use. The Data User should realize that these data may be actively used by others for ongoing research and that coordination may be necessary to prevent duplicate publication. The Data User is urged to contact the authors of these data if any questions about methodology or results occur. Where appropriate, the Data User is encouraged to consider collaboration or co-authorship with the authors. The Data User should realize that misinterpretation of data may occur if used out of context of the original study. While substantial efforts are made to ensure the accuracy of data and associated documentation, complete accuracy of data sets cannot be guaranteed. All data are made available "as is." The Data User should be aware, however, that data are updated periodically and it is the responsibility of the Data User to check for new versions of the data. The data authors and the repository where these data were obtained shall not be liable for damages resulting from any use or misinterpretation of the data. Thank you.
+    https://doi.org/10.6073/pasta/968299a53784f9649eb67f421cc33340
+      
+        Allequash Lake
+        
+          -89.6458
+          -89.6124
+          46.0481
+          46.0252
+        
+      
+      
+        Big Muskellunge Lake
+        
+          -89.6335
+          -89.5935
+          46.0273
+          46.0051
+        
+      
+      
+        Crystal Lake
+        
+          -89.6191
+          -89.6082
+          46.0047
+          45.9989
+        
+      
+      
+        Sparkling Lake
+        
+          -89.7045
+          -89.6945
+          46.0158
+          46.0024
+        
+      
+      
+        Trout Lake
+        
+          -89.7038
+          -89.6464
+          46.079
+          46.0131
+        
+      
+      
+        Crystal Bog
+        
+          -89.6068
+          -89.6057
+          46.008
+          46.0071
+        
+      
+      
+        Trout Bog
+        
+          -89.6869
+          -89.6854
+          46.0417
+          46.0407
+        
+      
+      
+        Fish Lake
+        
+          -89.6622
+          -89.6439
+          43.2922
+          43.2821
+        
+      
+      
+        Lake Mendota
+        
+          -89.4837
+          -89.3673
+          43.146
+          43.0766
+        
+      
+      
+        Lake Monona
+        
+          -89.4001
+          -89.3251
+          43.0905
+          43.0451
+        
+      
+      
+        Lake Wingra
+        
+          -89.4317
+          -89.4046
+          43.0581
+          43.0487
+        
+      
+      
+        
+          
+            1981-07-28
+          
+          
+            2022-12-31
+          
+        
+      
+    
+    
+              ongoing
+
+    
+    
+      NTL LTER
+      			680 North Park Street
+			Madison, WI 53706  United States
+      ntl.infomgr@gmail.com
+      04gq8q482
+    
+    
+    Environmental Data Initiativeinfo@edirepository.orghttps://edirepository.org0330j0z60Environmental Data Initiative
+    
+      
+                  The same sampling sites are used each year. All sampling occurs between the 3rd week of July and Labor Day. Sampling sites were chosen by random process in 1981 for the Northern lakes (Trout, Allequash, Sparkling, Crystal, and Big Muskellunge). Sites for Lake Mendota were chosen in 1981, and for the other Madison lakes (Monona, Fish, and Wingra) in 1995. All sites are identified with GPS coordinates, except on the bog lakes (Trout Bog and Crystal Bog) where nets are placed equal distances apart around the entire circumference of the lake in approximately the same locations each year. 
+          Night seining is conducted on 6 seine sites per lake, each consisting of 100 meters of shoreline. Prior to 1997 this was subdivided into 3 seine hauls, each covering 33 meters. In 1997, seine hauls were reduced to 2 hauls of 33m each. The final section of the site is used as an alternate seine site in the event of difficulty in one of the first two hauls. 
+          The seine used is 12.2 m long by 1.2 m deep, consisting of two 5.5 x 1.2 m wings surrounding a 1.2 x 1.2 x 1.2 m central bag. The wings are made of 6.4 mm stretch measure knitted delta-strength nylon mesh, and the bag is of 3.2 mm delta strength nylon mesh. The entire net is tarred. The two wings and the opening to the bag have weighted foot ropes and buoyed head ropes. An 8m length of rope is tied between the seine poles as a guide for the maximum spread of the seine. 
+          A trammel net is set at two sites in each lake, and fished for approximately 24 hours at each site. The net is set on the bottom, along a line perpendicular to the shoreline and crossing the thermocline, with the shallow end at about 3m depth,. The trammel net used is 30.5 m long and 1.1 m deep. It consists of two outer nets of 170 mm square 32 kg test mesh multifilament nylon with an inner panel of 51 mm stretch mesh 9 kg test multifilament nylon. The three nets are connected at the leaded foot line and the buoyed head rope.
+          Fyke nets are deployed at six littoral sampling sites in each lake, and fished for approximately 24 hours. In Crystal Bog and Trout Bog lakes the fyke nets are suspended by placing floats on the hoops and frames to prevent the nets from sinking into the sediments. For the northern lakes, each fyke net is approximately 12 m long and consists of two rectangular steel frames 90 cm wide by 75 cm high and 4 steel hoops, all covered by 7 mm delta stretch mesh nylon netting. An 8 m long by 1.25 m deep leader net made of 7 mm delta stretch mesh nylon netting is attached to a center bar of the first rectangular frame (net mouth). The second rectangular frame has two 10 cm wide by 70 cm high openings, one on each side of the frame center bar. The four hoops follow the second frame. Throats 10 cm in diameter are located between the second and third hoops. The net ends in a bag with a 20.4 cm opening at the end, which is tied shut while the net is fishing. New nets of the same dimensions were purchased for the Northern Highland lakes in 2000. Fyke nets for the Madison lakes are 10 m long (including lead) with 1 rectangular aluminum frame followed by 2 aluminum hoops. The aluminum frame is 98 cm wide x 82 cm tall, and is constructed of 2.5 cm tubing, with an additional center vertical bar. The hoops are 60 cm in diameter and constructed of 5 mm diameter aluminum rod. The single net funnel is between the first and second hoops and is 20 cm in diameter. The lead is 8 m long and 1.25m deep, constructed from 7mm delta stretch mesh. 
+          Crayfish traps are set on all lakes except the bog lakes (Crystal Bog and Trout Bog). Minnow traps are set only on the bog lakes. Prior to 1998, five traps were set at each fyke net site. Beginning 1998, three traps are set per site. Minnow traps and crayfish traps are set in shallow water (approx 1 m), 2 traps on one side, and 1 trap on the other side of the fyke net lead. Minnow traps are baited with 1 slice of bread, and crayfish traps with 120 g of beef liver. Traps are fished for approximately 24 hours. Crayfish are identified to species. Minnows caught in either crayfish or minnow traps are identified to species, and measured for total length. Minnow traps are galvanized steel two piece traps, 44.5 cm long by 30.5 cm maximum diameter with 2.5 cm diameter openings at the ends. The mesh size is 6.4 mm on a side. Crayfish traps are identical, but the opening hole of both sides of the trap has been forced to 5 to 7 cm. Crayfish sampling was terminated for the southern lakes circa 2004 after it was determined that the catch per unit effort was too low (2 crayfish caught in 500+ traps).
+          Gill nets are set at the deepest point of all LTER lakes except Crystal Bog, Trout Bog, and Fish Lake. The nets are set for two consecutive 24 hour sets. The gill nets are a set of 7 nets, each in a different mesh size, hung vertically on foam rollers from the surface to the bottom of the lake, and chained together in a line. Each net is 4 m wide and 33 m long. From 1981 through 1990 the nets were multifilament mesh, in stretched mesh sizes of 19, 25, 32, 38, 51, 64, and 89 mm. In 1991, the multifilament nets were replaced with monofilament nets of the same sizes. Stretcher bars are installed at 10 meter intervals from the bottom to keep the net as rectangular as possible when deployed.
+          A boom style electrofishing system is used to sample the littoral zone fish community. Prior to 1997, four electrofishing transects were done on each lake. In 1997, the number of transects was reduced to 3. The same transects are used each year. Each transect consists of 30 minutes of current output, with the boat moving parallel to shore in 1-2 meters of water at a slow steady speed. We use the DC pulse system, with 240 volts at 3-5 amps. Transect lengths vary depending upon the size of the lake. If the end of a transect is reached before 30 minutes has elapsed, time is paused while the electrofisher loops back to the start of the transect. The transect is then repeated for the remaining time.
+          For all collecting methods, the fish are processed as follows. Each individual fish is identified to species. The total length of the fish is measured in mm, from nose to pinched tail. Prior to 1997, the weight of the first five fish of each species in each 10 mm size category was also measured, using Pesola spring balances. Starting in 1997, two fish are weighed for each species in each 5mm size category. A scale sample is collected from each yellow perch, rock bass, and cisco that is weighed. For gill net catches, the depth at which each individual is caught is also recorded. 
+          Protocol Log. 1983: Discontinued fyke nets and trammel nets on Lake Mendota until 1995. 1984: Discontinued crayfish on Lake Mendota until 1995. Only gillnet and seines on Lake Mendota.1995: Resumed sampling Lake Mendota with the full suite of sampling gear. 1995: Began sampling Lakes Wingra, Monona, and Fish. 1997: Two fish are weighed for each fish species in each 5mm size category. Previously, five fish were weighed for each fish species in each 10mm size category. 1997: Data recording switched from manual field sheets to an electronic system. 1997: Changed from 4 to 3 electro-fishing runs per lake. 1997: Changed from 18 to 12 seine hauls per lake. 1998: Changed from 30 to 18 crayfish or minnow traps per lake. 2004: Discontinued crayfish or minnow traps on southern lakes. 2020: Fish sampling very limited due to pandemic.  2021: All night seining was discontinued.
+
+      
+    
+    
+      LTER: Comparative Studies of a Suite of Lakes in Wisconsin 1980
+      
+        John Magnuson
+        University of Wisconsin-Madison
+        PI
+      
+      
+        National Science Foundation LTER
+        LTER 8012313
+        LTER: Comparative Studies of a Suite of Lakes in Wisconsin
+      
+      
+        LTER: Comparative Studies of a Suite of Lakes in Wisconsin 1986
+        
+          John Magnuson
+          University of Wisconsin-Madison
+          PI
+        
+        
+          National Science Foundation
+          LTER 8514330
+          LTER: Comparative Studies of a Suite of Lakes in Wisconsin
+        
+      
+      
+        LTER: Comparative Studies of a Suite of Lakes in Wisconsin 1991
+        
+          John Magnuson
+          University of Wisconsin-Madison
+          PI
+        
+        
+          National Science Foundation
+          LTER 9011660
+          LTER: Comparative Studies of a Suite of Lakes in Wisconsin
+        
+      
+      
+        LTER: Comparative Studies of a Suite of Lakes in Wisconsin 1996
+        
+          Stephen Carpenter
+          University of Wisconsin-Madison
+          PI
+        
+        
+          National Science Foundation
+          LTER 9632853
+          LTER: Comparative Studies of a Suite of Lakes in Wisconsin
+        
+      
+      
+        LTER: Comparative Studies of a Suite of Lakes in Wisconsin 2002
+        
+          Stephen Carpenter
+          PI
+        
+        
+          National Science Foundation
+          LTER 0217533
+          LTER: Comparative Studies of a Suite of Lakes in Wisconsin
+        
+      
+      
+        LTER: Comparative Studies of a Suite of Lakes in Wisconsin 2008
+        
+          Emily Stanley
+          University of Wisconsin-Madison
+          PI
+        
+        
+          National Science Foundation
+          LTER 0822700
+          LTER: Comparative Studies of a Suite of Lakes in Wisconsin
+        
+      
+      
+        LTER: Comparative Studies of a Suite of Lakes in Wisconsin 2014
+        
+          Emily Stanley
+          University of Wisconsin-Madison
+          PI
+        
+        
+          National Science Foundation
+          LTER 1440297
+          LTER: Comparative Studies of a Suite of Lakes in Wisconsin
+        
+      
+      
+        LTER: Comparative Studies of a Suite of Lakes in Wisconsin 2021
+        
+          Emily Stanley
+          PI
+        
+        
+          National Science Foundation
+          LTER 2025928
+          LTER: Comparative Studies of a Suite of Lakes in Wisconsin
+        
+      
+    
+    
+      North Temperate Lakes LTER: Fish Lengths and Weights
+      North Temperate Lakes LTER: Fish Lengths and Weights
+      
+        ntl6_v12.csv
+        31093190
+        cc9c3f9d80ccdfc7fa387af2faa0f953
+        
+          
+            1
+            \r\n
+            column
+            
+              ,
+              "
+            
+          
+        
+        
+          
+            https://pasta.lternet.edu/package/data/eml/knb-lter-ntl/6/34/7dddb5e70250d2e24537e34272316220
+          
+        
+      
+      
+        
+          lakeid
+          lake name abbreviation
+          string
+          
+            
+              
+                
+                  
+                    AL
+                    Allequash Lake
+                  
+                  
+                    BM
+                    Big Muskellunge Lake
+                  
+                  
+                    CB
+                    Crystal Bog
+                  
+                  
+                    CR
+                    Crystal Lake
+                  
+                  
+                    FI
+                    Fish Lake
+                  
+                  
+                    ME
+                    Lake Mendota
+                  
+                  
+                    MO
+                    Lake Monona
+                  
+                  
+                    SP
+                    Sparkling Lake
+                  
+                  
+                    TB
+                    Trout Bog
+                  
+                  
+                    TR
+                    Trout Lake
+                  
+                  
+                    WI
+                    Lake Wingra
+                  
+                
+              
+            
+          
+        
+        
+          year4
+          year
+          float
+          
+            
+              
+                nominalYear
+              
+              
+                integer
+              
+            
+          
+        
+        
+          sampledate
+          sample date
+          dateTime
+          
+            
+              YYYY-MM-DD
+              
+            
+          
+        
+        
+          gearid
+          gear type
+          string
+          
+            
+              
+                
+                  
+                    BSEINE
+                    Beach Seine
+                  
+                  
+                    CRAYTR
+                    Crayfish Trap
+                  
+                  
+                    ELFISH
+                    Electrofishing System
+                  
+                  
+                    FYKNED
+                    Fyke Net
+                  
+                  
+                    FYKNEL
+                    Fyke Net
+                  
+                  
+                    FYKNET
+                    Fyke Net
+                  
+                  
+                    MINNOW
+                    Minnow Trap
+                  
+                  
+                    TRAMML
+                    Trammel Net
+                  
+                  
+                    VGN
+                    Gill Net
+                  
+                  
+                    VGN019
+                    Gill Net
+                  
+                  
+                    VGN025
+                    Gill Net
+                  
+                  
+                    VGN032
+                    Gill Net
+                  
+                  
+                    VGN038
+                    Gill Net
+                  
+                  
+                    VGN051
+                    Gill Net
+                  
+                  
+                    VGN064
+                    Gill Net
+                  
+                  
+                    VGN089
+                    Gill Net
+                  
+                  
+                    VGN127
+                    Gill Net
+                  
+                
+              
+            
+          
+        
+        
+          spname
+          species common name
+          string
+          
+            
+              
+                
+                  species common name
+                
+              
+            
+          
+        
+        
+          sampletype
+          sample type
+          string
+          
+            
+              
+                
+                  sample type
+                
+              
+            
+          
+        
+        
+          depth
+          depth at which the sample or measurement was taken
+          float
+          
+            
+              
+                meter
+              
+              
+                real
+                
+                  -2
+                  35
+                
+              
+            
+          
+        
+        
+          rep
+          replicate number
+          float
+          
+            
+              
+                dimensionless
+              
+              
+                integer
+              
+            
+          
+        
+        
+          indid
+          individual id
+          string
+          
+            
+              
+                
+                  individual id
+                
+              
+            
+          
+        
+        
+          length
+          length of individual fish
+          float
+          
+            
+              
+                millimeter
+              
+              
+                whole
+                
+                  0
+                  1250
+                
+              
+            
+          
+        
+        
+          weight
+          weight of individual fish
+          float
+          
+            
+              
+                gram
+              
+              
+                real
+              
+            
+          
+        
+        
+          sex
+          sex
+          string
+          
+            
+              
+                
+                  sex
+                
+              
+            
+          
+        
+        
+          fishpart
+          fishpart
+          string
+          
+            
+              
+                
+                  
+                    F
+                    Frozen
+                  
+                  
+                    K
+                    Kept
+                  
+                  
+                    M
+                    Stomach
+                  
+                  
+                    O
+                    Otolith
+                  
+                  
+                    S
+                    Scale
+                  
+                  
+                    SF
+                    Scale Frozen
+                  
+                
+              
+            
+          
+        
+        
+          spseq
+          sp sequence
+          string
+          
+            
+              
+                
+                  sp sequence
+                
+              
+            
+          
+        
+        
+          flag
+          data flag for fish
+          string
+          
+            
+              
+                
+                  
+                    A
+                    Excluded from CPUE 
+                  
+                  
+                    E
+                    Estimated length
+                  
+                  
+                    R
+                    Reconstructed from memory
+                  
+                
+              
+            
+          
+        
+      
+      no
+      349229
+    
+  
+  
+    
+      
+    
+  
