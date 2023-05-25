@@ -16,15 +16,101 @@ execute:
 
 Link to my repo: https://github.com/veronique-let/ENVS-193DS_homework-04_Letourneau-Veronique.
 
-## Problem 1
+```{r libraries}
+library(tidyverse)
+library(here)
+library(janitor)
+library(ggeffects)
+library(performance)
+library(naniar) 
+library(flextable) 
+library(car)
+library(broom)
+library(dplyr)
+library(plyr)
+library(ggplot2)
+```
 
-1. Write your null and alternative hypotheses in mathematical and biological terms.
-2. Create a visualization of the missing data for the filtered data set containing the observations you will use.
-a. Write an accompanying caption explaining how/if the missing data is relevant to your hypotheses.
-3. Run your test.
-4. Visually check the assumptions of your test. Display your diagnostic plots in a grid.
-5. For each diagnostic plot, describe in 1-2 sentences what it is showing you, and what you decide after looking at the plot.
+Reading in and cleaning up the data:
+
+```{r reading-data}
+fish_data <- read_csv(here("data", "knb-lter-ntl.6.34", "ntl6_v12.csv")) %>%  
+  # make the column names cleaner
+  clean_names() %>% 
+  # selecting the columns of interest
+  select(year4, spname, length, weight)
+ 
+```
+
+```{r filtering-for-species}
+# filtering for yellowperch species only
+fish_subset <- fish_data %>% 
+    group_by(spname) %>% 
+    filter(spname =="YELLOWPERCH")
+```
+
+## Problem 1.
+
+**Question posed: How does fish length predict fish weight for trout perch across all sample years?**
+
+#### 
+1. Hypotheses:
+
+H0: β~1~ = 0
+
+HA: β~1~ ≠ 0
+
+Null Hypothesis (H0): Fish length does not predict fish weight for trout perch.
+
+Alternate Hypothesis (HA): Fish length predicts fish weight for trout perch.
+
+#### 
+2. Missing data visualization:
+
+```{r missing-data-visualization}
+gg_miss_var(fish_subset) +
+  labs(caption = "The data frame has missing weight data which will affect the hypothesis
+       that fish length predicts fish weight") +
+  theme(plot.caption = element_text(size=9, color="blue", hjust = 0.5))
+```
+
+#### 
+3. Running linear test:
+
+```{r linear-model}
+# lm = linear model (~ (what should be predicting)
+fish_model <- lm(length ~ weight, data = fish_subset)
+
+fish_model
+```
+
+#### 
+4. Visual assumption check:
+
+```{r assumption-check}
+# displaying as 2x2 grid
+par(mfrow = c(2, 2)) 
+# visually checking assumptions
+plot(fish_model)
+```
+
+#### 5. Diagnostic plot results: 
+
+1.  Linear relationship between variables: Looking at the QQ Plot as well as the scale-location plot, the relationship does not seem to be linear as the data points accumulate in one area of the graph and do not follow the linear line of the QQ plot.
+
+2.  Homoscedasticity of errors: Looking at the residuals vs. fitted plot, the residuals do not follow a unform distribution around the line and accumulate in certain areas. The scale-location plot and residual vs. fitted show that the data does not appear to be homoscedastic.
+
+3.  Normally distributed errors: Some residuals have been numbered on the residuals vs. leverage plot, however, none are outside of the Cook's distance which leads to say that the data has normally distributed errors.
+
+    ```{r grid-turn-off, results = FALSE}
+    dev.off()
+    ```
+
 6. Display the results from summary() using your model object.
+
+```{r summary-results, results= = TRUE}
+summary(fish_model)
+```
 
 7\. Create a table that summarizes the ANOVA table. Make sure this table has informative column and row names and p-values displayed without scientific notation.
 8. In 1-2 sentences, describe how the ANOVA table relates to the information you get from the summary() object.
