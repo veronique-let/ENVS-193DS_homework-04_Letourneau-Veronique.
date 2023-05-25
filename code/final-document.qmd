@@ -100,14 +100,91 @@ plot(fish_model)
     dev.off()
     ```
 
-6. Display the results from summary() using your model object.
+#### 
+6. Summary results from fish linear model:
 
 ```{r summary-results, results= TRUE}
-summary(fish_model)
+# storing the fish summary as an object
+fish_summary <- summary(fish_model)
+fish_summary
 ```
 
 7\. Create a table that summarizes the ANOVA table. Make sure this table has informative column and row names and p-values displayed without scientific notation.
+
+```{r anova-table}
+# storing the ANOVA table as an object
+# anova(): special function to get analysis of variance tables for a model
+fish_anova <- anova(fish_model)
+
+fish_anova
+```
+
+```{r}
+model_squares_table <- tidy(fish_anova) %>% 
+  # round the sum of squares and mean squares columns to have 5 digits 
+  mutate(across(sumsq:meansq, ~ round(.x, digits = 1))) %>% 
+  # round the F-statistic to have 1 digit
+  mutate(statistic = round(statistic, digits = 1)) %>% 
+  # replace the small p value with < 0.001
+  mutate(p.value = case_when(
+    p.value < 0.001 ~ "< 0.001")) %>% 
+  # rename the weight cell to be meaningful by including unit and specie
+  mutate(term = case_when(
+    term == "weight" ~ "Perch Weight (g)",
+    TRUE ~ term
+  )) %>% 
+  # make the data frame a flextable object
+  flextable() %>% 
+  # change the header labels to be meaningful
+  set_header_labels(df = "Degrees of Freedom", 
+                    sumsq = "Sum of squares",
+                    meansq = "Mean squares",
+                    statistic = "F-statistic",
+                    p.value = "p-value")
+
+model_squares_table
+```
+
 8. In 1-2 sentences, describe how the ANOVA table relates to the information you get from the summary() object.
 9. In 2-3 sentences, summarize your results in prose with in-text references to test results. Include all relevant information.
-10. Create a visualization with model predictions and confidence intervals on top of the underlying data. Finalize your plot.
-a. Write an accompanying caption.
+
+#### 
+10. Visualization of model predictions and confidence intervals on top of the underlying data:
+
+```{r prediction-data}
+# extract model predictions using ggpredict
+predictions <- ggpredict(fish_model, terms = "weight")
+
+predictions
+```
+
+```{r predict-visualization}
+plot_predictions <- ggplot(data = fish_data, 
+                           aes(x = weight, 
+                               y = length)) +
+  # plotting the underlying data for perch fish
+  geom_point() +
+  # and plotting the predictions
+  geom_line(data = predictions, 
+            aes(x = x, 
+                y = predicted), 
+                color = "purple", linewidth = 1) +
+  # plotting the 95% confidence interval from ggpredict
+  geom_ribbon(data = predictions, 
+              aes(x = x, 
+                  y = predicted, 
+                  ymin = conf.low, 
+                  ymax = conf.high), 
+                  alpha = 0.2) +
+  # theme and meaningful labels
+  theme_bw() +
+  labs(x = "Stem length (mm)",
+       y = "Stem dry mass (g)",
+       caption = "Predictions of the model with 95% confidence intervals
+       (in purple), on top of the raw data") +
+       theme(plot.caption = element_text(size=9, 
+                                         color="blue", 
+                                         hjust = 0.5))
+
+plot_predictions
+```

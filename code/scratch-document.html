@@ -98,6 +98,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="scratch-document_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="scratch-document_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="scratch-document_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="scratch-document_files/libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
+<script src="scratch-document_files/libs/tabwid-1.1.3/tabwid.js"></script>
 
 
 </head>
@@ -239,10 +241,17 @@ Coefficients:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
-<li><p>Display the results from summary() using your model object.</p></li>
+</ol>
+</section>
+<section id="section-4" class="level4">
+<h4 class="anchored" data-anchor-id="section-4"></h4>
+<ol start="6" type="1">
+<li>Summary results from fish linear model:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fish_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># storing the fish summary as an object</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fish_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(fish_model)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>fish_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -265,7 +274,116 @@ Multiple R-squared:  0.7943,    Adjusted R-squared:  0.7943
 F-statistic: 4.933e+04 on 1 and 12771 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>7. Create a table that summarizes the ANOVA table. Make sure this table has informative column and row names and p-values displayed without scientific notation. 8. In 1-2 sentences, describe how the ANOVA table relates to the information you get from the summary() object. 9. In 2-3 sentences, summarize your results in prose with in-text references to test results. Include all relevant information. 10. Create a visualization with model predictions and confidence intervals on top of the underlying data. Finalize your plot. a. Write an accompanying caption.</p>
+<p>7. Create a table that summarizes the ANOVA table. Make sure this table has informative column and row names and p-values displayed without scientific notation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># storing the ANOVA table as an object</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># anova(): special function to get analysis of variance tables for a model</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>fish_anova <span class="ot">&lt;-</span> <span class="fu">anova</span>(fish_model)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>fish_anova</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: length
+             Df   Sum Sq  Mean Sq F value    Pr(&gt;F)    
+weight        1 37664209 37664209   49328 &lt; 2.2e-16 ***
+Residuals 12771  9751187      764                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model_squares_table <span class="ot">&lt;-</span> <span class="fu">tidy</span>(fish_anova) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># round the sum of squares and mean squares columns to have 5 digits </span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(sumsq<span class="sc">:</span>meansq, <span class="sc">~</span> <span class="fu">round</span>(.x, <span class="at">digits =</span> <span class="dv">1</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># round the F-statistic to have 1 digit</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">statistic =</span> <span class="fu">round</span>(statistic, <span class="at">digits =</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># replace the small p value with &lt; 0.001</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p.value =</span> <span class="fu">case_when</span>(</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    p.value <span class="sc">&lt;</span> <span class="fl">0.001</span> <span class="sc">~</span> <span class="st">"&lt; 0.001"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># rename the weight cell to be meaningful by including unit and specie</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">term =</span> <span class="fu">case_when</span>(</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    term <span class="sc">==</span> <span class="st">"weight"</span> <span class="sc">~</span> <span class="st">"Perch Weight (g)"</span>,</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> term</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make the data frame a flextable object</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">flextable</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># change the header labels to be meaningful</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_header_labels</span>(<span class="at">df =</span> <span class="st">"Degrees of Freedom"</span>, </span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>                    <span class="at">sumsq =</span> <span class="st">"Sum of squares"</span>,</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>                    <span class="at">meansq =</span> <span class="st">"Mean squares"</span>,</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>                    <span class="at">statistic =</span> <span class="st">"F-statistic"</span>,</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>                    <span class="at">p.value =</span> <span class="st">"p-value"</span>)</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>model_squares_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div class="tabwid"><style>.cl-7d5a6790{}.cl-7d497228{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-7d4fb0f2{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-7d4fb0fc{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-7d4fe63a{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7d4fe644{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7d4fe64e{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7d4fe658{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7d4fe659{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7d4fe662{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-7d5a6790"><thead><tr style="overflow-wrap:break-word;"><th class="cl-7d4fe63a"><p class="cl-7d4fb0f2"><span class="cl-7d497228">term</span></p></th><th class="cl-7d4fe644"><p class="cl-7d4fb0fc"><span class="cl-7d497228">Degrees of Freedom</span></p></th><th class="cl-7d4fe644"><p class="cl-7d4fb0fc"><span class="cl-7d497228">Sum of squares</span></p></th><th class="cl-7d4fe644"><p class="cl-7d4fb0fc"><span class="cl-7d497228">Mean squares</span></p></th><th class="cl-7d4fe644"><p class="cl-7d4fb0fc"><span class="cl-7d497228">F-statistic</span></p></th><th class="cl-7d4fe63a"><p class="cl-7d4fb0f2"><span class="cl-7d497228">p-value</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-7d4fe64e"><p class="cl-7d4fb0f2"><span class="cl-7d497228">Perch Weight (g)</span></p></td><td class="cl-7d4fe658"><p class="cl-7d4fb0fc"><span class="cl-7d497228">1</span></p></td><td class="cl-7d4fe658"><p class="cl-7d4fb0fc"><span class="cl-7d497228">37,664,209</span></p></td><td class="cl-7d4fe658"><p class="cl-7d4fb0fc"><span class="cl-7d497228">37,664,208.9329</span></p></td><td class="cl-7d4fe658"><p class="cl-7d4fb0fc"><span class="cl-7d497228">49,328.3</span></p></td><td class="cl-7d4fe64e"><p class="cl-7d4fb0f2"><span class="cl-7d497228">&lt; 0.001</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-7d4fe659"><p class="cl-7d4fb0f2"><span class="cl-7d497228">Residuals</span></p></td><td class="cl-7d4fe662"><p class="cl-7d4fb0fc"><span class="cl-7d497228">12,771</span></p></td><td class="cl-7d4fe662"><p class="cl-7d4fb0fc"><span class="cl-7d497228">9,751,187</span></p></td><td class="cl-7d4fe662"><p class="cl-7d4fb0fc"><span class="cl-7d497228">763.5414</span></p></td><td class="cl-7d4fe662"><p class="cl-7d4fb0fc"><span class="cl-7d497228"></span></p></td><td class="cl-7d4fe659"><p class="cl-7d4fb0f2"><span class="cl-7d497228"></span></p></td></tr></tbody></table></div>
+</div>
+</div>
+<ol start="8" type="1">
+<li>In 1-2 sentences, describe how the ANOVA table relates to the information you get from the summary() object.</li>
+<li>In 2-3 sentences, summarize your results in prose with in-text references to test results. Include all relevant information.</li>
+</ol>
+</section>
+<section id="section-5" class="level4">
+<h4 class="anchored" data-anchor-id="section-5"></h4>
+<ol start="10" type="1">
+<li>Visualization of model predictions and confidence intervals on top of the underlying data:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract model predictions using ggpredict</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(fish_model, <span class="at">terms =</span> <span class="st">"weight"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>predictions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Predicted values of length
+
+weight | Predicted |           95% CI
+-------------------------------------
+     0 |     91.58 | [ 90.93,  92.22]
+    50 |    139.50 | [139.02, 139.98]
+   150 |    235.36 | [234.39, 236.33]
+   200 |    283.29 | [281.94, 284.64]
+   250 |    331.22 | [329.46, 332.97]
+   300 |    379.15 | [376.98, 381.31]
+   350 |    427.07 | [424.50, 429.65]
+   500 |    570.86 | [567.03, 574.69]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plot_predictions <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> fish_data, </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">aes</span>(<span class="at">x =</span> weight, </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">y =</span> length)) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plotting the underlying data for perch fish</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># and plotting the predictions</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> predictions, </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> x, </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> predicted), </span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">color =</span> <span class="st">"purple"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plotting the 95% confidence interval from ggpredict</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> predictions, </span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">x =</span> x, </span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> predicted, </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymin =</span> conf.low, </span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymax =</span> conf.high), </span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>                  <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># theme and meaningful labels</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Stem length (mm)"</span>,</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Stem dry mass (g)"</span>,</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Predictions of the model with 95% confidence intervals</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="st">       (in purple), on top of the raw data"</span>) <span class="sc">+</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme</span>(<span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">9</span>, </span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">color=</span><span class="st">"blue"</span>, </span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>plot_predictions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="scratch-document_files/figure-html/predict-visualization-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
 </section>
 
