@@ -1,0 +1,198 @@
+---
+title: "Homework 4"
+author: "Veronique Letourneau"
+date: "2023-05-25"
+format: html
+editor: visual
+execute: 
+  message: false
+  warning: false
+---
+
+Link to my repo: https://github.com/veronique-let/ENVS-193DS_homework-04_Letourneau-Veronique.
+
+```{r libraries}
+library(tidyverse)
+library(here)
+library(janitor)
+library(ggeffects)
+library(performance)
+library(naniar) 
+library(flextable) 
+library(car)
+library(broom)
+library(dplyr)
+library(plyr)
+library(ggplot2)
+```
+
+Reading in and cleaning up the data:
+
+```{r reading-data}
+fish_data <- read_csv(here::here("data", "knb-lter-ntl.6.34", "ntl6_v12.csv")) %>% 
+  # make the column names cleaner
+  clean_names() %>% 
+  # selecting the columns of interest
+  select(year4, spname, length, weight)
+```
+
+```{r filtering-for-species}
+# filtering for yellowperch species only
+fish_subset <- fish_data %>% 
+    group_by(spname) %>% 
+    filter(spname =="YELLOWPERCH")
+```
+
+## Problem 1.
+
+**Question posed: How does fish length predict fish weight for trout perch across all sample years?**
+
+#### 
+1. Hypotheses:
+
+H0: β~1~ = 0
+
+HA: β~1~ ≠ 0
+
+Null Hypothesis (H0): Fish length does not predict fish weight for trout perch.
+
+Alternate Hypothesis (HA): Fish length predicts fish weight for trout perch.
+
+#### 
+2. Missing data visualization:
+
+```{r missing-data-visualization}
+gg_miss_var(fish_subset) +
+  labs(caption = "The data frame has missing weight data which will affect the hypothesis
+       that fish length predicts fish weight") +
+  theme(plot.caption = element_text(size=9, color="blue", hjust = 0.5))
+```
+
+#### 
+3. Running linear test:
+
+```{r linear-model}
+# lm = linear model (~ (what should be predicting)
+fish_model <- lm(length ~ weight, data = fish_subset)
+
+fish_model
+```
+
+#### 
+4. Visual assumption check:
+
+```{r assumption-check}
+# displaying as 2x2 grid
+par(mfrow = c(2, 2)) 
+# visually checking assumptions
+plot(fish_model)
+```
+
+##### 5. Diagnostic plot results: 
+
+1.  Linear relationship between variables: Looking at the QQ Plot as well as the scale-location plot, the relationship does not seem to be linear as the data points accumulate in one area of the graph and do not follow the linear line of the QQ plot.
+
+2.  Homoscedasticity of errors: Looking at the residuals vs. fitted plot, the residuals do not follow a unform distribution around the line and accumulate in certain areas. The scale-location plot and residual vs. fitted show that the data does not appear to be homoscedastic.
+
+3.  Normally distributed errors: Some residuals have been numbered on the residuals vs. leverage plot, however, none are outside of the Cook's distance which leads to say that the data has normally distributed errors.
+
+    ```{r grid-turn-off, results = FALSE}
+    dev.off()
+    ```
+
+#### 
+
+##### 6. Summary results from fish linear model:
+
+```{r summary-results, results= TRUE}
+# storing the fish summary as an object
+fish_summary <- summary(fish_model)
+fish_summary
+```
+
+##### 7. ANOVA table:
+
+```{r anova-table}
+# storing the ANOVA table as an object
+# anova(): special function to get analysis of variance tables for a model
+fish_anova <- anova(fish_model)
+
+fish_anova
+```
+
+```{r}
+model_squares_table <- tidy(fish_anova) %>% 
+  # round the sum of squares and mean squares columns to have 5 digits 
+  mutate(across(sumsq:meansq, ~ round(.x, digits = 1))) %>% 
+  # round the F-statistic to have 1 digit
+  mutate(statistic = round(statistic, digits = 1)) %>% 
+  # replace the small p value with < 0.001
+  mutate(p.value = case_when(
+    p.value < 0.001 ~ "< 0.001")) %>% 
+  # rename the weight cell to be meaningful by including unit and specie
+  mutate(term = case_when(
+    term == "weight" ~ "Perch Weight (g)",
+    TRUE ~ term
+  )) %>% 
+  # make the data frame a flextable object
+  flextable() %>% 
+  # change the header labels to be meaningful
+  set_header_labels(df = "Degrees of Freedom", 
+                    sumsq = "Sum of squares",
+                    meansq = "Mean squares",
+                    statistic = "F-statistic",
+                    p.value = "p-value")
+
+model_squares_table
+```
+
+#### 
+8.  ANOVA table vs. summary() object:
+
+The ANOVA table provides a summary of the sources of variation and the associated degrees of freedom, sums of squares, mean squares, F-value, and p-value found in the summary() object in a more comprehensive way.
+
+#### 
+9. Results summary:
+
+Based on the linear regression model results, there is a significant relationship between fish length and fish weight for trout perch (β1 = 0.9586, t = 222.1, p \< 2e-16). The intercept is 91.5751 (t = 279.8, p \< 2e-16). The model explains a substantial amount of the variation in fish length (R-squared = 0.7943). These findings are supported by the ANOVA results, which indicate a highly significant F-value (F = 49328, p \< 2.2e-16) for the predictor variable weight. Thus, we reject the null hypothesis and conclude that fish length predicts fish weight for trout perch.
+
+#### 
+10. Visualization of model predictions and confidence intervals on top of the underlying data:
+
+```{r prediction-data}
+# extract model predictions using ggpredict
+predictions <- ggpredict(fish_model, terms = "weight")
+
+predictions
+```
+
+```{r predict-visualization}
+plot_predictions <- ggplot(data = fish_data, 
+                           aes(x = weight, 
+                               y = length)) +
+  # plotting the underlying data for perch fish
+  geom_point() +
+  # and plotting the predictions
+  geom_line(data = predictions, 
+            aes(x = x, 
+                y = predicted), 
+                color = "purple", linewidth = 1) +
+  # plotting the 95% confidence interval from ggpredict
+  geom_ribbon(data = predictions, 
+              aes(x = x, 
+                  y = predicted, 
+                  ymin = conf.low, 
+                  ymax = conf.high), 
+                  alpha = 0.2) +
+  # theme and meaningful labels
+  theme_bw() +
+  labs(x = "Weight (g)",
+       y = "Length (mm)",
+       caption = "Predictions of the model with 95% confidence intervals
+       (in purple), on top of the raw data") +
+       theme(plot.caption = element_text(size=9, 
+                                         color="blue", 
+                                         hjust = 0.5))
+
+plot_predictions
+```
