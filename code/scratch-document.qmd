@@ -2,12 +2,7 @@
 title: "Homework 4"
 author: "Veronique Letourneau"
 date: "2023-05-25"
-format: 
-  html:
-   toc: true
-    toc-location: left
-    code-fold: true
-    theme: yeti 
+format: html
 editor: visual
 execute: 
   message: false
@@ -34,12 +29,11 @@ library(ggplot2)
 Reading in and cleaning up the data:
 
 ```{r reading-data}
-fish_data <- read_csv(here("data", "knb-lter-ntl.6.34", "ntl6_v12.csv")) %>%  
+fish_data <- read_csv(here::here("data", "knb-lter-ntl.6.34", "ntl6_v12.csv")) %>% 
   # make the column names cleaner
   clean_names() %>% 
   # selecting the columns of interest
   select(year4, spname, length, weight)
- 
 ```
 
 ```{r filtering-for-species}
@@ -108,7 +102,7 @@ plot(fish_model)
 
 6. Display the results from summary() using your model object.
 
-```{r summary-results, results= = TRUE}
+```{r summary-results, results= TRUE}
 summary(fish_model)
 ```
 
