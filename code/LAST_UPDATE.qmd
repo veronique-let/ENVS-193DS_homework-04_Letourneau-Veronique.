@@ -2,7 +2,7 @@
 title: "Homework 4"
 author: "Veronique Letourneau"
 date: "2023-05-25"
-format: html
+format: docx
 editor: visual
 execute: 
   message: false
@@ -84,8 +84,8 @@ fish_model
 4. Visual assumption check:
 
 ```{r assumption-check}
-# displaying as 2x2 grid
-par(mfrow = c(3, 3)) 
+# displaying as grid
+par(mfrow = c(2, 2)) 
 # visually checking assumptions
 plot(fish_model)
 ```
